@@ -154,4 +154,27 @@ Magic Variables
 
 Ansible Facts
 -
--
+- When we run playbook and ansible connects to target machine, it collects all info of machine like OS, processor, memory, host,networks, IP. They are facts
+- Ansible gathers all these facts using "setup module". Setup module is run auto by ansible to gather facts about host when run even if we dont use this module in playbook.
+
+- Suppose we've to onluy print message means just one task using debug module. When we run playbook we see it run 2 tasks. First to gather facts and 2nd to print.
+
+![image](https://github.com/user-attachments/assets/84a35c4e-5758-4616-82fd-016278e3ae88)
+
+- All facts gathered by ansible are stored in variable "**ansible_facts**"
+
+![image](https://github.com/user-attachments/assets/a288d6fe-efaa-420a-a05b-9ff347a69a33)
+
+- If we dont want ansible to gather facts, means to disable gathering facts, we can do that using "gather_facts: no" in our play. So we can see only single task of printing.
+
+![image](https://github.com/user-attachments/assets/ce3c64e0-0724-4a32-b688-36d4bc026144)
+
+- Behavior of gathering facts is governed by setting in ansible cfg file called "**gathering**" (explicit/implicit)
+
+![image](https://github.com/user-attachments/assets/80a0546f-bfed-4cae-96d0-161cc9e8cf6e)
+
+- If we havent specified gathering facts neither in playbook nor in cfg file, setting in playbook takes precedence.
+
+- Ansible only gathers facts about hosts that are part of playbook. Lets say we've inv file with 2 hosts but playbook targets only 1 host, so facts will be gathered only for that 1 host in playbook
+
+![Uploading image.png…]()
