@@ -38,10 +38,46 @@ Ansible Configuration Files
  
 - View Config
   -  List all configurations along with default values :- **ansible-config list** 
-  - To see which cfg file is active :- ansible-config view
-  - To see which setting is picked by ansible :- ansible-config dump
+  - To see which cfg file is active :- **ansible-config view**
+  - To see which setting is picked by ansible :- **ansible-config dump**
  
 ![image](https://github.com/user-attachments/assets/ccef1b74-81d0-4b29-8615-cbd1da56c057)
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+Understanding YAML file
+-
+- All ansible playbooks are written in YAML. Playbooks are text files/config file
+- Yml file is used to represnet cfg data. We define key-value paired data here separated by colon+space. Another way is array and dictionary format
+
+![image](https://github.com/user-attachments/assets/bfeb4147-4035-4f57-a2cf-203b6a7e3a7a)
+
+- As per above, in dictionary all the facts are aligned. If we add space before any fact, it will falll under the prior one. Thus we needd equal spaces.
+- Suppose we've list containing dictionary containing lists.
+
+![image](https://github.com/user-attachments/assets/b480e7f4-52be-453e-9d99-ca4e00ae0870)
+
+- **Dictionary**
+  - For car we 've color, price, model etc which we can define in form of dictionary key-value format
+
+![image](https://github.com/user-attachments/assets/25957311-5ace-4c39-b05a-f2735edfcb4f)
+
+- **Dictionary in dictionary**
+  - If we've to split model further into name and year, we can define the same as dictionary with another dictionary
+ 
+![image](https://github.com/user-attachments/assets/72bb951b-9764-49c7-8f95-d07a6c4734b2)
+
+- **Lists**
+  - If we've to store name of 6 cars in form of color and car, we can use list of arrays as we've same type of object, whcich is string of lists
+
+![image](https://github.com/user-attachments/assets/b402afde-2e33-4e6f-b093-550d17725a41)
+
+- **List of dictionaries**
+  - If we've to stpre all the info like dictionary for each car like color, model, price. We'll now modify array from list of strings to list of dictionary 
+
+![image](https://github.com/user-attachments/assets/29515712-96ae-4229-b7fa-5b9835532ab3)
+
+
+** Dictionary is unordered collection whereas list is ordered. We can set prop inside dictionaries any order. In lists order of items matter
+
+![image](https://github.com/user-attachments/assets/a36b08c5-8d7b-4739-84c9-8a3de6b7ad04)
