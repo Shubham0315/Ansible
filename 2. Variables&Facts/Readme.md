@@ -177,4 +177,4 @@ Ansible Facts
 
 - Ansible only gathers facts about hosts that are part of playbook. Lets say we've inv file with 2 hosts but playbook targets only 1 host, so facts will be gathered only for that 1 host in playbook
 
-![Uploading image.png…]()
+![image](https://github.com/user-attachments/assets/9e418c78-5830-4014-ab8a-53ff90fc79b0)
