@@ -78,4 +78,60 @@ Ansible-lint
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
   
+Ansible Conditionals
+-
+- Suppose we've 2 playbooks doing same task to install nginx on host but diff OS use diff package managers (for debian -apt and redhat -yum). As these are sepaarte playbooks we've to use right hosts for respective playbooks.
 
+![image](https://github.com/user-attachments/assets/81ac5f8c-5d45-4c94-bd1c-6a87bef825c7)
+
+- But what if we've to create single playbook for both of the OS for all hosts. Based on OS our playbook will run respective task. Here we can use conditional statements
+  - We can use "when" to specify condition to run specific task so only if condition is met the task is executed
+ 
+  ![image](https://github.com/user-attachments/assets/8b321d84-49e3-4675-8e64-06ce252925c8)
+
+  - Condition can be any check that we perform just like "ansible_os_family" to check OS. Here we've to use == to check condtion
+ 
+  ![image](https://github.com/user-attachments/assets/2c979486-1577-4626-bfe9-e76c33885d4c)
+
+  - We can use "or" operator to use either of 2 conditions. Use "and" operator to satisfy both conditions
+ 
+  ![image](https://github.com/user-attachments/assets/11ff0a36-d4b5-4e2c-a3f5-a5d790fe9d7b)
+
+- We can use condtionals in loops as well. Like instead of sinhle package we've to install list of packages
+  - Here we've array named "packages" to have list and property as below
+  - First we specify loop directive to execute the install task in a loop, name of package to be installed is "item.name"
+ 
+  ![image](https://github.com/user-attachments/assets/d0fc79c3-f0c0-4634-b57b-2ff771979962)
+
+  - If we expand the loop we can see the loop is in 3 diff packages, each task having variable called "item" which has respective package details
+  - So while writing condtionals, we can define item.required=true
+
+  ![image](https://github.com/user-attachments/assets/0cc4e375-e24c-4d88-9dae-5393872a107c)
+  ![image](https://github.com/user-attachments/assets/0d0d8fe2-642a-4de5-a64f-5e5bafc1949a)
+
+- To use conditionals with output of a previous task we've to develop a playbook to check service status and trigger mail if service is down (2 task play)
+  - Here to record 1st task o/p, we can use "register" directive :- **register: result**
+  - In 2nd task we can use "when" conditional on that result variable of 1st task to state if result is down . Find method looks for string within variable and resturns its position, if not found it returns -1 as below.
+  - That means if there is output not equal to -1, send email
+ 
+  ![image](https://github.com/user-attachments/assets/5383b69e-484d-420c-b79e-140acf3224aa)
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Ansible conditionals based on Facts, Variables and Re-use
+-
+- Suppose our organizatioon have a mix of diff servers of ubuntu, centos and windows. We've to automate deployment of web app across all servers
+- Here playbook might need to perform diff sets of actions for diff servers
+- Suppose we only have to install nginx on Ubuntu servers with 18.0 version. To ensure OS version running on server. Here we can use ansible-facts
+  - Facts are system specific variables that are used in playbooks. They collect info about servers during execution of playbook
+ 
+![image](https://github.com/user-attachments/assets/51bd6fb9-537c-4c49-a127-887436b939fa)
+
+- Suppose our web app have diff config requirements based on env like dev, staging, prod end. We can define variable "app_env" to specify env and use it to deploy appropriate config file for specified env. It is using conditionals on variables
+
+![image](https://github.com/user-attachments/assets/e4f79df4-e544-45d9-aeb9-b878d19efeef)
+
+- Suppose we've common set of tasks to be performed on all servers like install package, create dir and give permissions
+- But here we want to start web app service only on servers in prod. We can define variable "environment" and use it in conditional for our condition. It is conditional usage for reuse.
+
+![image](https://github.com/user-attachments/assets/1f019a5e-a77a-4993-b43f-8d80d6555b76)
