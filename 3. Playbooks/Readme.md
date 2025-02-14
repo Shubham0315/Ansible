@@ -141,4 +141,36 @@ Ansible conditionals based on Facts, Variables and Re-use
 
 Ansible Loops
 -
-- 
+- Suppose we're creating ansible playbooks to create users and assist them using "user" module which is used to create users on target systems
+- But what if we've to create multiple users. We can have single task to loop over all the users. Thats where we use loops.
+- Loop is a looping directive that executes same task multiple no of times each time it runs. It stores the value of each item in a loop in variable named "item".
+  - So we can replace name by "item" variable as shown
+
+  ![image](https://github.com/user-attachments/assets/80243ae9-79fd-454e-bb1a-52f01a77e024)
+
+  - Here we dont repeat lines of user module or state
+  - We can visualize loop like below for better understanding
+
+  ![image](https://github.com/user-attachments/assets/3370011f-e887-4b7a-9b08-00c9144b8ebf)
+
+  - Lopp breaks down into multiple tasks and within each task we've variable defined as "item" and each item has value from the list
+  - Here loop is an array of string values, just usernames in above case
+  - What if we've to specify user id as well. So each item in loop will have 2 values username and user ID
+
+  ![image](https://github.com/user-attachments/assets/c7429997-5d57-42be-8b17-a50326ccbfb9)
+
+  - Here how we can pass 2 values in array? So instead of passing an array of string to the loop we'll pass in array of dictionaries. Each disctionary will have 2 key value pairs. Keys will be name and ID and values will be name and IDs of each user
+  - But now what we can use inside our task? We cannot use "item". As each task uses same module and parameter. We can see item variable inside each task in loop is a disctionary which has name and uid of each user.
+  - So here we can do "item.name" and "item.uid" which we can define in task section
+  - **In array of dictionaries we can use "array.propertyName"
+
+  ![image](https://github.com/user-attachments/assets/4389bdcb-f051-4ee0-b01f-43b0522022a2)
+
+
+  - Loop directive is used to create simple loops that iterate over a lot of items
+ 
+- Another way to create loops is using "with_" directive
+
+![image](https://github.com/user-attachments/assets/a093856d-9258-47d6-a9c5-acf64762871e)
+
+  - With_items directive just iterates over a list of items. With_file directive iterates over multiple files and like that
