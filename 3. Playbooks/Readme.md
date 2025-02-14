@@ -135,3 +135,10 @@ Ansible conditionals based on Facts, Variables and Re-use
 - But here we want to start web app service only on servers in prod. We can define variable "environment" and use it in conditional for our condition. It is conditional usage for reuse.
 
 ![image](https://github.com/user-attachments/assets/1f019a5e-a77a-4993-b43f-8d80d6555b76)
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Ansible Loops
+-
+- 
