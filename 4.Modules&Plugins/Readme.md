@@ -1,3 +1,5 @@
+# Ansible Modules
+
 - Ansible Modules are categirozed into various groups based on their functionality
 
 1. System modules :- Actions to be performed at system level. Modifying users, groups, host, restart
@@ -58,4 +60,36 @@
 - Used to search for a line in file and replace it or add it if it doesnt exist.
 - Suppose we've to add new server in conf file. Below playbook using "lineinfile" task adds new name server info to conf file.
 
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+# Ansible Plugins
+
+- Suppose we've complex infra with multiple VPCs, VMs and LBs spread across diff regions. Our goal is to automate provisioning confifg of these resources using ansible.
+- We might need inventory solution to fetch info about cloud resources like instances, SGs, tags to ensure our inventory remains up to date and reflects current state of infrastructure. But our inv file doesnt align to dynamic nature of our cloud env
+- Another requirement could be to create EC2 with specific AMI versions. SO we need ability to provision cloud resources with custom config
+- We may also need solution to dynamically configure LB rules, SSLs
+
+- To address all these :- Plugins which provides customization options beyond core ansible features
+- Plugin is a piece of code that extends or modifies fucntionality of ansible. Plugins can be used to enhance inventory, modules, callbacks. Provide flexible and powerful way to customize ansible behavior.
+
+- Plugins can be in form on Inventory plugin, Module plugin, Action plugin, Callback plugin
+
+1. Dynamic Inventory Plugin
+- We can fetch real time info about cloud resources from cloud provider API. It enables view of upto date infrastructure ensuring accurate and reliable automation
+
+2. Module Plugin
+- We can provision cloud resources with custom configurations. It connects with our cloud providers API allowing us to cerate instances with specific AMI versions, SGs based on our app requirements.
+
+3. Action Plugin
+- Simplifies LB management. We define high level tasks in our playbook making it easy to configue LB rules, SSL certs and heath checks. Ensures consistent LB management across hybrid cloud env
+
+4. Lookup Plugins
+- Tools that fetch data from external sources like DBs and use data within playbooks.
+
+5. Filter Plugins
+- Data manipulation capabilities within playbooks allowing to modify variables or format output.
+
+6. Connection Plugins
+- Use ansible to connect to various target systems like SSH, winrm or docker
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
