@@ -1,0 +1,78 @@
+#Just listing servers
+server1.company.com
+server2.company.com
+server3.company.com
+server4.company.com
+
+
+#added aliases for hosts
+web1 ansible_host=server1.company.com
+web2 ansible_host=server2.company.com
+web3 ansible_host=server3.company.com
+
+db1 ansible_host=server4.company.com
+
+
+#update the above alias with details like host, connection, user, password
+#web1,2,3 are linux machines and db1 is windows
+web1 ansible_host=server1.company.com ansible_connection=ssh ansible_user=root ansible_ssh_pass=Password123!      
+web2 ansible_host=server2.company.com ansible_connection=ssh ansible_user=root ansible_ssh_pass=Password123!
+web3 ansible_host=server3.company.com ansible_connection=ssh ansible_user=root ansible_ssh_pass=Password123!
+
+db1 ansible_host=server4.company.com ansible_connection=winrm ansible_user=administrator ansible_ssh_pass=Dbp@ss123!
+
+
+#add group called web servers and db servers
+web1 ansible_host=server1.company.com ansible_connection=ssh ansible_user=root ansible_ssh_pass=Password123!      
+web2 ansible_host=server2.company.com ansible_connection=ssh ansible_user=root ansible_ssh_pass=Password123!
+web3 ansible_host=server3.company.com ansible_connection=ssh ansible_user=root ansible_ssh_pass=Password123!
+
+db1 ansible_host=server4.company.com ansible_connection=winrm ansible_user=administrator ansible_ssh_pass=Dbp@ss123!
+
+[web_servers]
+web1
+web2
+web3
+
+[db_servers]
+db1
+
+
+#Create group all_servers and add web,db groups under it
+web1 ansible_host=server1.company.com ansible_connection=ssh ansible_user=root ansible_ssh_pass=Password123!      
+web2 ansible_host=server2.company.com ansible_connection=ssh ansible_user=root ansible_ssh_pass=Password123!
+web3 ansible_host=server3.company.com ansible_connection=ssh ansible_user=root ansible_ssh_pass=Password123!
+
+db1 ansible_host=server4.company.com ansible_connection=winrm ansible_user=administrator ansible_ssh_pass=Dbp@ss123!
+
+[web_servers]
+web1
+web2
+web3
+
+[db_servers]
+db1
+
+[all_servers:children]
+web_servers
+db_servers
+
+
+#add servers to different groups
+[web_nodes]
+web_node1
+web_node2
+web_node3
+
+[boston_nodes]
+sql_db1
+web_node1
+
+[dallas_nodes]
+sql_db2
+web_node2
+web_node3
+
+[us_nodes:children]
+boston_nodes
+dallas_nodes
