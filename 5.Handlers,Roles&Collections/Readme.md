@@ -110,4 +110,8 @@ Practical
  
 ![image](https://github.com/user-attachments/assets/efd9018e-7f05-4e05-a738-8042cf8d26f2)
 
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+# Ansbile Galaxy
+
+- Ansible galaxy is marketplace for ansible roles where roles are written and published by devops engineers and sys admins
