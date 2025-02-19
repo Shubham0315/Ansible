@@ -157,3 +157,73 @@ Difference between adhoc commands and playbook
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+Wht yaml is used ?
+-
+- We write playbooks in YAML. It is human readable data serialization language
+- Suppose for our python application, we need input in form of list of users (data). This can be passed to app using text file, json or yaml
+- Text file is not recommended as there is no standard format for that, no syntax for text file
+- Here std templating languages like json or yaml comes in. Thats why in devops we use these languages as data is structured in serialized way. Mostly yaml is used as its more human readable unlike JSON
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+How to write yaml?
+- 
+- To learn yaml we need to learn 4 things 
+  1. How to write strings, numbers and Booleans in yml. Syntax is :- name:<space>value
+     string: Hello World !
+     number: 42
+     Boolean: true
+  2. We need to know when to use list and its syntax
+     fruits:
+       - apple
+       - banana
+       - orange
+  3. When to use dictionary and its key-value pair
+     person:
+       name: Hohn
+       age: 30
+       city: NY
+  4. List of dictionaries
+ 
+- While writing yml file, in first line provide 3 hyphens (---)
+  #string
+  name: Shubham     #string
+  age: 26
+
+  #List 
+  Tasks:
+    - Monitoring
+    - CICD Automation
+
+  #Dictionary
+  Address:
+    street: NY
+    city: anagar
+
+- For each item in list use - whereas for each item in dictionary dont use hyphen as they are key value pairs
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Explain ansible playbook structure
+-
+- Playbook is a list of plays
+- Lets say our task is to setup DB server as well as app server. So both's installation and configurations can be written is different plays.
+
+![image](https://github.com/user-attachments/assets/1dfeeaf3-9767-43e8-9fa9-a7159120529e)
+
+- Ansible playbook follows structured format, typically written in yaml
+
+![image](https://github.com/user-attachments/assets/95278e33-90ec-4f89-9723-9b4562537ba2)
+
+  - name :- name of playbook
+  - hosts :- target machines on which we want to execute plays on
+  - vars :- defines variables that can be used throughout playbook
+  - tasks :- list of tasks inside each play
+  - handlers :- Used to define tasks triggered by other tasks (restart after config file change)
+  - roles :- Specifies reusable role named that contain predefined tasks, handlers, templates, variables
+
+- Playbook is list of plays and within each play we have things like hosts, remote_user, tasks (list), modules in each tasks. Modules perform execution of actions using ansible
+- To install apache and deploy. Here in tasks, first task is install apache3 server and 2nd task is to copy the index.html file and put in /var/www/html folder
+
+
+![image](https://github.com/user-attachments/assets/c8d3b4dd-afed-4bf0-a35f-46550f7d43cd)
