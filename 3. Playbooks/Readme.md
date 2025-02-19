@@ -5,9 +5,16 @@ Ansible Playbooks
 - These instructions can be running commands on servers and restarting those servers in specific order
 - It can be as complex as deploying 100s of VMs on public and private cloud, provision storage to VMs, setting up their network config, configuring apps on them, setting up LB, setting up monitoring , etc
 
+- Ansible playbooks are collection/combination of plays where in each play there are fields like host (on which host of inv file this play execute), variables, remote user (using which user should the play execute on managed nodes), tasks (collection of things to be executed on target servers). Within each task we provide module
+
+- Once we write this playbook, it is fed as input to control node where ansible is installed which then performs action on managed nodes
+  - Command :- **ansible-playboook -i inv_file playbook.yml**
+  - Ansible reads plays and execute the tasks as per servers in playbook
+  - If we mention hosts as all (hosts: all) play will execxute on all nodes in inv file. If we define group (hosts: group_name), it will do accordingly
+
 - All playbooks are written in yaml format. Play means set of tasks to be run on single or group of hosts. Task is an action performed on host like executing command, running shell script, install package, restart,etc.
 
-- Below is example of platbook to perform activities on localhost
+- Below is example of playbook to perform activities on localhost
 
 ![image](https://github.com/user-attachments/assets/05648f13-6952-47f8-9e36-73c9e082422d)
 
