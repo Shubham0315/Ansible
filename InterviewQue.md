@@ -63,4 +63,97 @@ Which is more suitable for automation? Ansible, python or shell scripting?
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-  
+How to install ansible?
+-
+- Go to ansible doc and search install ansible. Simplest way to install is using python pip
+- We need to have WSL distribution installed on our machine for control node requirements or use EC2 as ansible control node
+- Use pip in your selected Python env to install full ansible package for current user
+  Command :- **python3 -m pip install --user ansible**
+  If we have python installed, just use "pip install ansible"
+
+- After installing, we need some extensions on our VS code (install on VS code)
+  YAML (By redhat)
+  Ansible (By redhat)
+
+- To check version :- **ansible --version**
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+How ansible achieves Authentication?
+-
+- We install ansible on control (master) node. We provide instructions to ansible on control node with help of yaml(ansible playbooks) or adhoc commands. Instructions can be like install app on managed nodes (servers we want to install through ansible)
+- When we try to install app on worker, it will not take our instructions as it will need authentication, be it any VM, Physical server, instance (public, private). Its not possible to talk to physical or VM without authentication
+
+- 2 ways of authentication are :- **SSH keys and Password**
+
+- We can have public key setup on our target (worker) VMs and using private key we can talk to them
+- While running ansible, we cant provide password/key everytime for each VM as we're not doing automation. Instead we can setup passwordless authentication between control and managed nodes so ansible will directly execute instructions in yaml.
+- So passwordless authentication --> pre-requisite for ansible
+- When from our laptop we try to connect to other VM, it will either ask for password or .pem file(ssh key)
+
+- Passwordless authentication is a mechanism where we tell the target VM not to ask for password when we get request from source VM. Initially for the first time only we need to provide password or .pem file
+- To communicate with EC2 only way is using SSH key (.pem file)
+
+1. **Using SSH Key**
+- Now we have 2 managed node running instances. Go to terminal and run below command
+- Command :- ssh-copy-id -f "-o ~/Downloads/file.pem" ubuntu@PublicIP
+- For first time only we need to provide .pem file. From second time we can directly do ssh ubuntu@IP to go to VM without even providing .pem file, without aksing for SSH key
+
+![image](https://github.com/user-attachments/assets/90711cd9-cd68-4622-bfbc-91f72a9566c9)
+![image](https://github.com/user-attachments/assets/190b7fdf-99b4-4992-b085-ef6321ada271)
+
+
+2. **Using password**
+- Go to EC2 dashboard, connect to the instance and open below file :- **sudo vim /etc/ssh/sshd_config.d/.conf**
+- It is a cloud init file used to update ssh config which we need to update as "passwordauthentication" to "yes"
+- After that we have to restart the ssh :- **sudo systemctl restart ssh**
+- Then run : **sudo passwd ubuntu and update password**
+- Now logout and run :-  **ssh-copy-id ubuntu@IP**
+- From now on we can connect to EC2 without asking for password
+
+![image](https://github.com/user-attachments/assets/c772580d-3b23-4070-aed7-aa9f1a9948b5)
+![image](https://github.com/user-attachments/assets/8784f73f-d809-4f21-8ea4-896c4fa9df82)
+![image](https://github.com/user-attachments/assets/3bda8268-7087-4495-83b1-61b4c974ac33)
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Explain about ansible inventory
+-
+- Ansible control node executes instructions on managed nodes. But how control node understand managed nodes are?. There is a way for ansible to know what are its managed nodes
+- Inventory is a file in ansible where we put in name of our managed nodes (user, IP). Inventory can be written in 2 formats :- Inventory.ini and yaml
+- This file can be at any location on our machine. We just have to pass its path in ansible execution. On many ansible machines, the file is present in form of /etc/ansible/hosts, where "hosts" is inventory file
+- Inventory is heart of ansible as it tells control nodes which servers it has to connect with
+
+- There can be requirement we dont want to run command on all servers or on one server
+- Lets say there are 10 app servers and 5 DB servers. Here if we put all 15 instances in inventory. We can group servers in inventory file as well
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Ansible adhoc commands
+- 
+- Ansible adhoc commands are simple one liner commands used to quickly execute tasks on remote hosts without writing a playbook
+- They're used for quick troubleshooting, system administration and one time tasks
+
+- Syntax :- ansible <host-pattern> -m <module> -a "<module-arguments>"
+  - host-pattern :- Target hosts (from inv or defined in command)
+  - -m <module> :- specifies module to use (ping,shell,copy)
+  - -a "<module-arguments>" :- arguments for module
+ 
+- Check connectivity :- ansible all -m ping
+- Run shell command :- ansible all -m shell "uptime"
+- Check disk usage :- ansible all -m command -a "df -h"    #command is module here
+- Create file :- ansible all -m file -a "path=/tmp/testfile"
+- Copy file :- ansible all -m copy -a "src=/home/user/file.txt dest=/tmp/file.txt"
+- Install package :- ansible all -m apt -a "name=nginx state=present" -b
+- Restart service :- ansible all -m service -a "name=nginx state=restarted" -b
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Difference between adhoc commands and playbook
+-
+- Adhoc commands are for one time use whereas playbooks are for reusable automation
+- In adhoc we dont need yaml like playbooks
+- Adhoc are simple commands and best for quick tasks
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
