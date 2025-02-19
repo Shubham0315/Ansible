@@ -102,10 +102,12 @@ Practical
 - Move our index.html and paste in httpd/files. So that our dir will now have playbook, inv file, and httpd role
 - Go to src section and update the location as files/index.html
 
-![image](https://github.com/user-attachments/assets/8b1a6ff8-f9c2-4a2f-b3f7-a89dba512bb2)
+![image](https://github.com/user-attachments/assets/60bab26e-7a66-472e-af98-658e9f53fa4f)
 
 - Now to run our role :- **ansible-playbook -i inventory playbook.yml**
   - This will first gather facts. Then install apache. Then copy files
   - It shows 0 changed tasks as ansible is idempotent. If anything is already there on target, it will not execute again
  
-![image](https://github.com/user-attachments/assets/9ca47106-d6f9-4cd8-9d49-4de37989bc82)
+![image](https://github.com/user-attachments/assets/efd9018e-7f05-4e05-a738-8042cf8d26f2)
+
+
