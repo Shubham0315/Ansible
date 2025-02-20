@@ -1,0 +1,16 @@
+#Install multiple packages using yum. Below playbook installs just 1 package. Update it to install all packages defined under packages variable
+
+---
+- name: 'Install required packages'
+  hosts: localhost
+  become: yes
+  vars:
+    packages:
+      - httpd
+      - make
+      - vim
+  tasks:
+    - yum:
+        name: vim
+        state: present
+      with_items: '{{ packages }}'
