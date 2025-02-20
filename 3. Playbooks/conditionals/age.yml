@@ -1,0 +1,15 @@
+#Age is variable defined. Two tasks are to check if person is child or adult
+
+---
+- name: 'Am I child or Adult?'
+  hosts: localhost
+  vars:
+    age: 25
+  tasks:
+    - name: I am child
+      command: 'echo "I am child"'
+      when: 'age < 18"
+
+     - name: I am adult
+      command: 'echo "I am adult"'
+      when: 'age >= 18"
