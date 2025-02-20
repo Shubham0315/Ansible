@@ -1,0 +1,18 @@
+#Yml is to setup new user on remote servers. User details like username, password, email are added to inv file as dictionary variable as "user_Details"
+#User details are hardcoded in playbook. Update playbook to replace values and use from variable "user_Details" in in file.
+
+---
+- hosts: all
+  become: yes
+  tasks:
+    - name: Srtup user
+      user:
+#        name: "admin"
+#        password: "secret_pass"
+#        comment: "admin@example.com"
+#        state: present
+
+        name: "{{ user_details.username }}"
+        password: "{{ user_details.password }}"
+        comment: "{{ user_details.email }}"
+        state: present
