@@ -1,0 +1,12 @@
+#Apply loop directive with_items to task to print all fruits under fruits variable
+---
+- name: 'Print list of fruits'
+  hosts: localhost
+  vars:
+    fruits:
+      - apple
+      - banana
+      - orange
+  tasks:
+    - command: 'echo "{{ item }}'
+      with_items: '{{ fruits }}'
