@@ -1,0 +1,72 @@
+---
+- name: 'Execute a date command on localhost'
+  hosts: localhost
+  become: yes
+  tasks:
+    - name: 'Execute a date command'
+      command: date
+
+
+#Add task to display host file for existing task
+- name: 'Execute a command to display hosts file on localhost'
+  hosts: localhost
+  become: yes
+  tasks:
+    - name: 'Task to display hosts file'
+      command: 'cat /etc/hosts'
+
+
+#Exacute task to display date. Also, add new task to execute cat/etc/resolv.conf and set its name to "Task to display nameservers"
+
+- name: 'Execute two commands on localhost'
+  hosts: localhost
+  become: yes
+  tasks:
+    - name: 'Execute a date command'
+      command: date
+    - name: 'Task to display nameservers'
+      command: 'cat /etc/resolv.conf'
+
+
+#Run tasks on other node than localhost which is defined in inv file. 
+
+- name: 'Execute two commands on localhost'
+  hosts: node01
+  become: yes
+  tasks:
+    - name: 'Execute a date command'
+      command: date
+    - name: 'Task to display nameservers'
+      command: 'cat /etc/resolv.conf'
+
+
+#Run playbook on servers defined in inv file under web_nodes group
+
+---
+- name: 'Execute two commands on web_nodes'
+  hosts: web_nodes
+  become: yes
+  tasks:
+    - name: 'Execute a date command'
+      command: date
+    - name: 'Task to display hosts file'
+      command: 'cat /etc/hosts'
+
+
+#Execute 2 commands on node 1 and 1 command on node2
+
+- name: 'Execute two commands on node01'
+  hosts: node01
+  become: yes
+  tasks:
+    - name: 'Execute a date command'
+      command: date
+    - name: 'Task to display hosts file'
+      command: 'cat /etc/hosts'
+
+- name: 'Execute command on node01'
+  hosts: node02
+  become: yes
+  tasks:
+    - name: 'Task to display hosts file'
+      command: 'cat /etc/hosts'
