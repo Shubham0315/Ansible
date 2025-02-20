@@ -7,3 +7,37 @@
       lineinfile:
         path: /tmp/resolv.conf
         line: 'nameserver {{ nameserver_ip }}'
+
+#New task to disable SNMP port on localhost. Port is hardcoded in playbook, but we've to update it using variable defined in inventory.ini
+
+---
+- name: 'Add nameserver in resolv.conf file on localhost'
+  hosts: localhost
+  become: yes
+  tasks:
+    - name: 'Add nameserver ip in resolv.conf file'
+      lineinfile:
+        path: /tmp/resolv.conf
+        line: 'nameserver {{ nameserver_ip }}'
+    - name: 'Disable SNMP port'
+      firewalld:
+        port: '{{ snmp_port }}'
+        permanent: true
+        state: disabled
+
+
+#Playbook has info of employee. Add variables at play level. Use them within tasks to remove hardcoded values
+
+---
+- hosts: localhost
+  vars:
+    car_model: 'BMW M3'
+    country_name: USA
+    title: 'Systems Engineer'
+  tasks:
+    - command 'echo "My car is {{ car_model }}"'
+    - command 'echo "I live in the {{ country_name }}"'
+    - command 'echo "I work as a {{ title }}"'
+
+
+
