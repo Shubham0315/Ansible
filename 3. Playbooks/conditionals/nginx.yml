@@ -1,0 +1,9 @@
+#Starts nginx service on all hosts defined in inv file. Use when condition to run task only on node02 host
+
+---
+- name:
+  hosts: all
+  become: yes
+  tasks:
+    - service: 'name=nginx service=started'
+      when: 'ansible_host="node02"'
