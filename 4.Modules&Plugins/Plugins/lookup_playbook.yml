@@ -1,0 +1,8 @@
+#file lookup plugin to read content of local file
+--- 
+- name: Using lookup plugin for file content
+  hosts: localhost
+  tasks:
+    - name: Get content of local file
+      debug:
+        msg: "{{ lookup('file', '/pathOfLocal/file.txt') }}"
