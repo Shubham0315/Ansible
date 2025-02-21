@@ -1,0 +1,14 @@
+#To execute commands on remote node
+
+---
+- name: Play1
+  hosts: localhost
+  tasks:
+    - name: Execute command date
+      command: date
+
+    - name: Display resolv.conf contents
+      command: cat /etc/resolv.conf
+
+    - name: Display resolv.conf contents
+      command: cat resolv.conf chdir=/etc  #Alternative to above command
