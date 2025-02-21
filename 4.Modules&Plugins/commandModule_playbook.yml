@@ -12,3 +12,6 @@
 
     - name: Display resolv.conf contents
       command: cat resolv.conf chdir=/etc  #Alternative to above command
+
+    - name: Display resolv.conf contents
+      command: mkdir /folder creates=/folder   #Creates perform check before command is run. Create folder if doesnt exist
