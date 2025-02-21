@@ -1,0 +1,10 @@
+#double_values is custom filter to double each element in list
+--- 
+- name: Using custom filter Plugin
+  hosts: localhost
+  vars:
+    my_list: [1, 2, 3, 4, 5]
+  tasks:
+    - name: Apply custom filter to double the list values
+      debug:
+        msg: "{{ my_list | double_values }}"
