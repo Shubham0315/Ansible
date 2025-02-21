@@ -1,0 +1,7 @@
+---
+- name: Using vars plugin for dynamic variables
+  hosts: all
+  tasks:
+    - name: Display dynamically loaded variable
+      debug:
+        var: dynamic_var
