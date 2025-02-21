@@ -1,0 +1,18 @@
+# Use case of lineinfile to append html file on all nodes. Line to be added and create index.html is doesnt exist
+
+---
+- name: 'hosts'
+  hosts: all
+  become: yes
+  tasks:
+    - name: 'Execute a script'
+      script: '/tmp/install_script.sh'
+    - name: 'Start httpd service'
+      service:
+        name: 'httpd'
+        state: started
+    - name: "Create or update index.html"
+      lineinfile:
+        path: /var/www/html/index.html
+        line: "Welcome to course of ansible"
+        create: true  #create if doesnt exist
