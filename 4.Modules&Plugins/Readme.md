@@ -77,19 +77,37 @@
 
 1. Dynamic Inventory Plugin
 - We can fetch real time info about cloud resources from cloud provider API. It enables view of upto date infrastructure ensuring accurate and reliable automation
+- To dynamically generate inventory from various sources like cloud providers, databases or APIs
 
 2. Module Plugin
 - We can provision cloud resources with custom configurations. It connects with our cloud providers API allowing us to cerate instances with specific AMI versions, SGs based on our app requirements.
 
 3. Action Plugin
 - Simplifies LB management. We define high level tasks in our playbook making it easy to configue LB rules, SSL certs and heath checks. Ensures consistent LB management across hybrid cloud env
+- Used to modify how modules are executed in playbooks allowing custom logic before or after running module
 
 4. Lookup Plugins
 - Tools that fetch data from external sources like DBs and use data within playbooks.
+- Used to retrieve dynamic data such as secrets from vault or content from files
 
 5. Filter Plugins
 - Data manipulation capabilities within playbooks allowing to modify variables or format output.
+- Transform data inside Jinja2 templates. They extend Jinja2's filtering capabilities
+- Used for data manipulation, string formatting or processing variables
 
 6. Connection Plugins
 - Use ansible to connect to various target systems like SSH, winrm or docker
+- To manage communication between ansible controller and remote hosts
+
+7. Cache Plugins
+- Used to store facts (gathered system info) to speed up playbook execution by avoiding repeated fact gathering
+- Useful in environments with many hosts to improve performance
+
+8. Callback Plugins
+- It customizes output and notifications during playbook execution like logging, notifications or changing output formatting
+- Used for detailed logging or integration with monitoring tools
+
+9. Vars Plugin
+- To dynamically load variables from external sources or custom logic
+- To organize and manage complex variables or secrets
 --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
