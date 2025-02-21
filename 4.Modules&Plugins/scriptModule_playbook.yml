@@ -1,0 +1,8 @@
+#Executes scripts located locally on ansible control nodes after transferring it
+
+---
+- name: Play1
+  hosts: localhost
+  tasks:
+    - name: Run a script on remote server
+      script: /home/shubham/script.sh -arg1 -arg2
