@@ -1,0 +1,9 @@
+# my_custom_Action handles file creation with additional logic
+---
+- name: Using action plugin for custom logic
+  hosts: webservers
+  tasks:
+    - name: Custom action to create a file
+      my_custom_action:
+        path: /tmp/customfile.txt
+        content: "This is created by action plugin"
