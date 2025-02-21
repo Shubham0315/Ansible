@@ -1,0 +1,16 @@
+#Used to maintain services on system like start,stop, restart. Used to start services in specific order
+
+---
+- name: Start services in order
+  hosts: localhost
+  tasks:
+    - name: Start the DB service
+      service: name=postgresql state=started
+
+    - name: Start the httpd
+      service: name=httpd state=started
+
+    - name: Start the nginx server
+      service:
+        name: nginx
+        state: started
