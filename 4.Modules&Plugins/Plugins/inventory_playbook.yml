@@ -1,0 +1,6 @@
+plugin: aws_ec2
+regions:
+  - us_east-1
+keyed_groups:
+  - key: tags.Name
+    prefix: instance_
