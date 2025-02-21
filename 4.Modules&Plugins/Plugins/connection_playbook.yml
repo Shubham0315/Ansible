@@ -1,0 +1,9 @@
+#Connection: docker uses docker connection plugin to run commands inside containers
+
+---
+- name: Connect to docker container
+  hosts: docker_container
+  connection: docker
+  tasks:
+    - name: Check hostname inside container
+      command: hostname
