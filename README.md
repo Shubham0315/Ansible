@@ -1,5 +1,4 @@
 # Ansible
-
 Ansible Automation Lab 🛠️
 This repository contains hands-on Ansible playbooks, roles, and configurations for automating infrastructure management. Covers inventory management, variables, facts, templates, and essential modules to streamline server provisioning and configuration. Ideal for DevOps automation practice!
 
