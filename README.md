@@ -1,5 +1,9 @@
 # Ansible
 
+Ansible Automation Lab 🛠️
+This repository contains hands-on Ansible playbooks, roles, and configurations for automating infrastructure management. Covers inventory management, variables, facts, templates, and essential modules to streamline server provisioning and configuration. Ideal for DevOps automation practice!
+
+
 - In job, we tend to do repetitive tasks like server provisioning, configuration management, continuous delivery , app deployment, patchings servers, migrations. To automate the tasks, we simply develop scripts which requires coding skills and regular maintenance
 - Here ansible comes into help. We can automate even most complex deployments using ansible playbook which is set of automated instructions. We can even automate tasks on local, DB servers, web servers, cloud we just need to modify a line in playbooks
 
