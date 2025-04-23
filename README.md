@@ -3,7 +3,7 @@ This repository contains hands-on Ansible playbooks, roles, and configurations f
 
 Getting Started
 -
-- In job, we tend to do repetitive tasks like server provisioning, configuration management, continuous delivery , app deployment, patchings servers, migrations. To automate the tasks, we simply develop scripts which requires coding skills and regular maintenance
+- In our job work, we tend to do repetitive tasks like server provisioning, configuration management, continuous delivery , app deployment, patchings servers, migrations. To automate the tasks, we simply develop scripts which requires coding skills and regular maintenance
 - Here ansible comes into help. We can automate even most complex deployments using ansible playbook which is set of automated instructions. We can even automate tasks on local, DB servers, web servers, cloud we just need to modify a line in playbooks
 
 - Suppose we've no of hosts in our env that we've to restart in specific order, some of them are web based and some are DB. Suppose we've to first down web then db and up db then web ones. We can write ansible playbook to get this done and invoke it to restart our app.
