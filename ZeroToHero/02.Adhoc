@@ -1,0 +1,30 @@
+# Ansible Passwordless Authentication and Adhoc Command
+
+- Passwordless auth is pre-requisite for running ansible
+- Ansible inventory is heart of ansible
+
+Passwordless Authentication
+-
+- We install ansible on control (master) node. We provide instructions to ansible on control node with help of yaml(ansible playbooks) or adhoc commands (CLI).
+  - Instructions can be like install app on managed nodes (servers we want to install through ansible). Using YML or CLI we can provide insturctions for ansible to install app on managed nodes.
+  - When we try to install app on worker using CPI or yml playbook, it will not take our instructions as it will need authentication, be it any VM, Physical server, instance (public, private). Its not possible to talk to physical or VM without authentication
+
+- 2 ways of authentication :- SSH keys and Passwords
+  - We can have public key setup on our target (worker) VMs and using private key we can talk to them
+  - While running ansible, we cant provide password/key everytime for each VM as we're not doing automation.
+  - Instead we can setup prerequisite as passwordless authentication between control and managed nodes so ansible will directly talk to worker VMs and execute instructions in yaml. So passwordless authentication is pre-requisite for ansible
+
+- Passwordless authentication is a mechanism where we tell the target VM not to ask for password when we get request from source VM. This way we always trust source VM to allow access.
+
+- When from our laptop we try to connect to other VM, it will either ask for password or .pem file(ssh key). Initially for the first time only we need to provide password or .pem file.
+
+** To communicate with EC2 only way is using SSH key (.pem file), not using password
+
+Demo
+-
+- Lets create 2 instances in AWS which we need to connect from local. For one we'll use ssh key and for other password
+- Now use our laptop as control node and these 2 VMs as worker
+
+1. Using SSH Key
+- Now we have 2 managed node running instances. Go to terminal and run below command
+- Command :- ssh-copy-id -f "-o ~/Downloads/file.pem" ubuntu@PublicIP
