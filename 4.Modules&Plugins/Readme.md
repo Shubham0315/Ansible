@@ -1,6 +1,6 @@
 # Ansible Modules
 
-- Ansible Modules are categirozed into various groups based on their functionality
+- Ansible Modules are categorized into various groups based on their functionality
 
 1. System modules :- Actions to be performed at system level. Modifying users, groups, host, restart
 2. Command Modules :- Used to execute command or script on host. Includes command, expect, shell, script modules
