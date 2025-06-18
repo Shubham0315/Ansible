@@ -47,6 +47,8 @@ How config management tools came to rescue?
   - Can do provisioning like create infrastructure, resources on cloud/servers
   - Used for CICD deployment using artifacts. Like using control node, deploy app on multiple K8S clusters
   - Used for network automation
+ 
+- Suppose we've been given a task to install java. We'll write yaml file on control node, run ansible command which can talk to all other VMs (worker), java will be installed and run on all managed nodes (even if distribution of managed nodes is different)
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
