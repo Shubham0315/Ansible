@@ -10,6 +10,6 @@
       command: 'echo "I am child"'
       when: 'age < 18"
 
-     - name: I am adult
+    - name: I am adult
       command: 'echo "I am adult"'
       when: 'age >= 18"
