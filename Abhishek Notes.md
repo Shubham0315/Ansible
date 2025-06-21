@@ -103,3 +103,11 @@ Playbook
 -
 - Its written in YML language. YML is human readable data serialization format often used for config files and data exchange
 - It uses indentation in structured format
+- Playbook defines what tasks ansible should perform on which hosts
+- Playbook consist of :-
+  - **Plays** :- which hosts to target and in which order
+  - **Tasks** :- what to do like install, copy, restart
+  - **Modules** :- building blocks used in tasks (yum, copy, service)
+
+------------------------------------------------------------------------------
+
