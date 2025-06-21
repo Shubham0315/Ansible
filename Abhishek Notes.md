@@ -69,7 +69,7 @@ Ansible Inventory
 -
 - File that lists managed nodes where ansible has to automate infrastructure on. Its present on control node
 - It tells ansible which machines to manage and provides config info of those machines
-- Its present at :- /etc/ansible/hosts
+- Its present at :- /etc/ansible/hosts   (hosts is name of file)
 - Typically present in INI or YAML formats
 - It supports grouping of hosts or mark individual hosts
 
@@ -94,5 +94,12 @@ Ansible ADHOC commands
 - Check disk space on all servers :- **ansible all -m shell -a "df -h"**
 - Install package on web servers :- **ansible webservers -m apt -a "name=nginx state=present"**
 
+
+- If we define our inventory other than hosts suppose inventory.ini and want to ping :- **ansible -i inventory.ini -m ping all**
+
 ------------------------------------------------------------------------------
 
+Playbook
+-
+- Its written in YML language. YML is human readable data serialization format often used for config files and data exchange
+- It uses indentation in structured format
