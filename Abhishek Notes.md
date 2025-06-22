@@ -154,8 +154,59 @@ Ansible Handlers
 - In playbook, define handlers. Trigger with notify. Run handler once per play.
 - This mechanism ensures that changes requiring follow up actions are handled efficiently
 
+------------------------------------------------------------------------------
 
+Creating AWS resources using Ansible
+-
+- Ansible provides AWS collection which includes modules like ec2, rds, s3_bucket, and others to interact with AWS services.
+- Pre-requisites :-
+  - pip install ansible
+  - pip install boto3 botocore
+  - aws configure (configure creds and region)
+  - ansible-galaxy collection install amazon.aws (ansible AWS collection to access AWS modules)
+  - IAM roles access
+ 
+- Write the playbook with all config for S3 or EC2
 
+![image](https://github.com/user-attachments/assets/794f2408-87e6-4000-828b-7e8df75d5c1c)
 
+- Run the playbook :- **ansible-playbook aws_resources.yml**
+- Verify resources in AWS console
 
+------------------------------------------------------------------------------
+
+Ansible Vault
+-
+- Its an Ansible feature that allows you to securely store sensitive data like passwords, API keys or other credentials in encrypted files. It ensures sensitive information is not exposed in plaintext, even when stored in VCS
+- Vault is to manage secrets in infrastructure automation workflows
+
+- Features of Vault
+  - Encryption and decryption :- encrypt sensitive files using password or key, decrypt files when needed for playbook execution or editing
+  - Integration with Ansible :- used in playbooks, roles, variable files
+  - Granular security
+
+- Common Commands
+-
+- Create encrypted file :- **ansible-vault create file_name**
+- Edit encrypted file :- **ansible-vault edit file_name**
+- Encrypt existing file :- **ansible-vault encrypt file_name**
+- Decrypt existing file :- **ansible-vault decrypt file_name**
+- View encrypted content :- **ansible-vault view file_name**
+- Change password :- **ansible-vault rekey file_name**
+
+- If our playbook uses sensitive credentials, you can store password in file encrypted with Vault. During playbook execution, ansible auto decrypt file if correct password is provided, keeping creds secure
+
+------------------------------------------------------------------------------
+
+Variables in Ansible
+-
+- Variables allows to store and manage dynamic values like config parameters, credentials or env specific details which can be referenced and reused across playbooks, tasks, roles and templates
+- We can define variables in playbooks, in inv files (static/dynamic), in variables files and reference them in playbooks, inside facts
+
+- Variable precedence :- If variable is defined at multiple places, one with highest precedence will be used (Highest to lowest)
+  - Command line options - Task level - Role defaults - Play - Inventory - Facts
+ 
+- Variables can be string, integers, boolean, dictionaries
+
+------------------------------------------------------------------------------
 
