@@ -196,6 +196,11 @@ Ansible Vault
 
 - If our playbook uses sensitive credentials, you can store password in file encrypted with Vault. During playbook execution, ansible auto decrypt file if correct password is provided, keeping creds secure
 
+- Best practices for vault security
+  - Never store vault password file in source control
+  - Use role based access to encrypted files
+  - Rotate sensitive credentials regulary
+  
 ------------------------------------------------------------------------------
 
 Variables in Ansible
@@ -210,3 +215,55 @@ Variables in Ansible
 
 ------------------------------------------------------------------------------
 
+Ansible Project - Provisioning and Configuration Management
+-
+- Create 3 EC2, 2 of ubuntu and 1 of debian
+- Set passwordless authentication between ansible control and EC2
+- Automate shutdown of ubuntu instances only using ansible credentials
+
+1. Provision EC2 instances using Ansible
+- Use Ansible's EC2 module from amazon.aws.collection to interact with AWS APIs
+- Ansible control node installed on local connects to AWS using BOTO3
+- ec2_create.yml playbook is to provision 3 EC2
+
+2. Implementing passwordless SSH authentication
+- SSH keys allow secure and passwordless login
+
+3. Configuration management - Automating EC2 shutdown
+- ec2_stop.yml is written to check and shut down inactive services to help in cost optimization ensuring that idle resources are not running unnecessarily
+
+# Implementation
+
+- Create IAM user with required permissions to manage EC2 instances. Generate IAM keys for communication
+- Install dependencies like boto3 and amazon.aws.collection on control node
+  - pip install boto3 botocore
+  - ansible-galaxy collection install amazon.aws
+
+- Write ec2_create.yml
+
+![image](https://github.com/user-attachments/assets/d8d79655-4635-42df-9d15-083f4c14967d)
+
+- Configure passwordless SSH authentication
+  - Generate key pair on control node :- **ssh-keygen -t rsa -b 2048 -f ~/.ssh/id_rsa -q -N ""**
+  - Copy public key on all EC2 :-  **ssh-copy-id -i ~/.ssh/id_rsa.pub ubuntu@<INSTANCE_PUBLIC_IP>**
+ 
+- Write ec2_stop.yml
+
+![image](https://github.com/user-attachments/assets/f71bcbef-2bab-4f82-9d0b-7528317f9295)
+
+------------------------------------------------------------------------------
+
+Error handling in ansible playbooks
+-
+- It ensures playbooks run smoothly by managing failures and unexpected conditions.
+
+- ignore_erros: yes :- allows task to continue execution even if it fails
+- failed_when :- defines custom failure conditions
+- Using when for conditional execution
+- Using register to capture output and handle failures
+
+![image](https://github.com/user-attachments/assets/f33a64d3-2357-4185-8bb8-ca1e60bb9aad)
+
+![image](https://github.com/user-attachments/assets/2d01180f-5a19-42cd-aed7-2c4b20220958)
+
+------------------------------------------------------------------------------
