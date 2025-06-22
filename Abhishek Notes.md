@@ -111,3 +111,51 @@ Playbook
 
 ------------------------------------------------------------------------------
 
+Ansible Role
+-
+- Ansible role is a reusable, self-contained unit of automation that is used to organize and manage tasks, variables, file, templates and handlers in structured way.
+- Roles help to encapsulate and modularize logic and config needed to manage system or application component
+- This modular approach promotes reusability, maintainability and consistency across different playbooks and environments
+
+![image](https://github.com/user-attachments/assets/3cbf6c56-0b2f-4e38-9d1d-3225549de75c)
+
+- In above
+  - Files :- are static files we can copy on remote hosts using copy module
+  - Templates :- Files using Jinja2 Templating language to enable dynamic content generation.
+
+![image](https://github.com/user-attachments/assets/784abbb4-d0b2-43b8-83a8-911cfd690f9a)
+
+- To create role manually using command :- **ansible-galaxy init webserver**
+
+- **Modularity** :- Roles allow to break down complex playbooks into smaller, reusable components. Each role handles specific part of config
+- **Reusability** :- Once created roles can be used across playbooks and projects saving time and effort
+- **Readability** :- Roles make playbooks cleaner and easier to read 
+
+------------------------------------------------------------------------------
+
+Ansible Galaxy 
+-
+- Its a community hub for finding, sharing, downloading and managing ansible roles and collections. It allows users to find prebuilt roles to automate tasks, saving effort and time
+- We can use "ansible-galaxy" command to download or manage roles. Roles are reusable units of automation
+- Command to install role from ansible galaxy into project :- **ansible-galaxy install username.role**
+- To create/initialize role :- **ansible-galaxy role init httpd**
+
+- First we need to install role from galaxy and then define it in playbook and then run the playbook so that whatever is defined in roles get executed on our hosts
+
+------------------------------------------------------------------------------
+
+Ansible Handlers
+-
+
+![image](https://github.com/user-attachments/assets/aecebff9-f16e-4692-9d6c-2cff5e646721)
+
+- Handlers are special tasks triggered by notify statements. Typically used to perform actions that should only run when there is a change in syatem such as restarting service after updating config file
+
+- In playbook, define handlers. Trigger with notify. Run handler once per play.
+- This mechanism ensures that changes requiring follow up actions are handled efficiently
+
+
+
+
+
+
